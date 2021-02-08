@@ -12,7 +12,7 @@ public class Lexer {
 		ArrayList<String> stringListe = new ArrayList<>();
 		
 		
-		//String in Chars umwandlen
+		//String in Chars umwandlenn
 		ArrayList<Character> chars = (ArrayList<Character>) fun
 																.chars()
 			    												.mapToObj(e->(char)e)
