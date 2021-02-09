@@ -11,7 +11,7 @@ public class Tester {
 		
 		System.out.println(lexerTest());
 	
-	
+		System.out.println(Lexer.lexen("4*sin(4x)"));
 	}
 	
 	

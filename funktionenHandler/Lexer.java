@@ -6,42 +6,45 @@ import java.util.stream.Collectors;
 public class Lexer {
 	
 	
-	static ArrayList<String> lexen(String fun)
+	public static ArrayList<String> lexen(String funktion_String)
 	{
-		
-		ArrayList<String> stringListe = new ArrayList<>();
+			
 		
 		
 		//String in Chars umwandlenn
-		ArrayList<Character> chars = (ArrayList<Character>) fun
-																.chars()
-			    												.mapToObj(e->(char)e)
-			    												.collect(Collectors.toList());
-		
+		ArrayList<Character> charListe = String_to_Chars(funktion_String);
+				
 		//Leerzeichen entfernen
-		for(int i = chars.size() - 1; i >= 0; i--)
-		{
-			
-			if(chars.get(i) == ' ')
-				chars.remove(i);
-			
-		}
+		removeSpace(charListe);
 		
 		
 		//Zahlen zusammenfassen und alles in Strings darstellen
-		for(int i = 0; i < chars.size(); i++)
+		ArrayList<String> stringListe = conclude_to_String(charListe);
+			
+		
+		return stringListe;
+		
+	}
+	
+	
+	
+	private static ArrayList<String> conclude_to_String(ArrayList<Character> charListe)
+	{
+		ArrayList<String> stringListe = new ArrayList<>();
+		
+		for(int i = 0; i < charListe.size(); i++)
 		{
 			
-			String s = String.valueOf(chars.get(i));
-			if(!isZahl(chars.get(i))) 
+			String s = String.valueOf(charListe.get(i));
+			if(!isZahl(charListe.get(i))) 
 			{
 				stringListe.add(s);
 				continue;
 			}
 			i++;
-			while(i < chars.size() && (isZahl(chars.get(i)) || chars.get(i) == '.'))
+			while(i < charListe.size() && (isZahl(charListe.get(i)) || charListe.get(i) == '.'))
 			{
-				s = s + String.valueOf(chars.get(i));
+				s = s + String.valueOf(charListe.get(i));
 				i++;
 			}
 			
@@ -50,16 +53,40 @@ public class Lexer {
 			i--;
 		}
 		
-			
-		
 		return stringListe;
 		
+		
 	}
+	
+	
+	
+	private static void removeSpace(ArrayList<Character> charListe)
+	{
+		for(int i = charListe.size() - 1; i >= 0; i--)
+		{
+			
+			if(charListe.get(i) == ' ')
+				charListe.remove(i);
+			
+		}
+		
+		
+	}
+	
+	private static ArrayList<Character> String_to_Chars(String string)
+	{
+		return (ArrayList<Character>) string
+										.chars()
+										.mapToObj(e->(char)e)
+										.collect(Collectors.toList());
+		
+	}
+	
 	
 	/*
 	 * Chechen, ob ein Char eine Zahl ist
 	 */
-	static boolean isZahl(char c)
+	private static boolean isZahl(char c)
 	{
 		try {
 		Double.parseDouble(String.valueOf(c));
