@@ -37,39 +37,42 @@ public class Baum {
 	
 	
 	/*
-	 * Braucht als Input eine Zeichenkette, die vorher via Parser geparst wurde.
+	 * Braucht als Input eine Zeichenkette, die vorher via Lexer gelext wurde.
 	 * Erzeugt den Baum rekursiv. Als Endklassen des Baumes kommen NumberChild oder VarChild infrage.
 	 * Die mathematischen Operatoren (*, + , - ...) werden als Typ von der Klasse Operator gespeichert.
 	 */
 	static Baum createBaum(ArrayList<String> zeichenListe)
 	{
+		//Abbruchbedienungen behandeln
+		if(zeichenListe.size() == 1)			
+		{			
+			
+			if(zeichenListe.get(0).equals("x"))
+			{				
+				return VarChild.createVarChild();				
+			}
+			if(Lexer.isDouble(zeichenListe.get(0)))
+			{				
+				return NumberChild.createNumberChild(zeichenListe);				
+			}			
+			
+		}
+		
+		
 		
 		Baum leftChild = null;
 		Baum rightChild = null;
 		ArrayList<String> leftList = new ArrayList<>();
 		ArrayList<String> rightList = new ArrayList<>();
+	
 		
-		
-		if(zeichenListe.size() == 1)
-		{
-			if(zeichenListe.get(0).equals("x") )
-			{
-				return VarChild.createVarChild();				 
-			}
-			else
-			{
-				
-				return NumberChild.createNumberChild(zeichenListe);
-			}
-			
-		}
-		
-		int opPos = Operator.findeOperator(zeichenListe);
+		int opPos = Operator.findeOperator(zeichenListe); //eleminiert auch unnötige Klammern
 		
 		
 		
 		//Create Operator for Root
 		Operator operator = new Operator(zeichenListe.get(opPos));
+		
 		
 		//Create LeftList
 		for(int i = 0; i < opPos; i++)
@@ -88,44 +91,9 @@ public class Baum {
 		
 		
 		
+		leftChild = Baum.createBaum(leftList);
+		rightChild = Baum.createBaum(rightList);
 		
-		//Create RightChild
-		if(rightList.size() > 1)
-		{			
-			 rightChild = Baum.createBaum(rightList);			
-		}		
-		
-		else
-		{		
-			if(rightList.get(0).equals("x"))
-			{
-				rightChild = VarChild.createVarChild();
-			}
-			else
-			{	
-				rightChild = NumberChild.createNumberChild(rightList);		
-			}
-		}
-		
-		
-		
-		//Create LeftChild
-		if(leftList.size() > 1)
-		{			
-			 leftChild = Baum.createBaum(leftList);			
-		}
-		else
-		{			
-			if(leftList.get(0).equals("x"))
-			{
-				leftChild = VarChild.createVarChild();
-			}
-			else
-			{	
-				leftChild = NumberChild.createNumberChild(leftList);		
-			}
-		}
-				
 		
 		Baum baum = new Baum(leftChild, rightChild, operator);
 		

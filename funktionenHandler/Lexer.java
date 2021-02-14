@@ -36,13 +36,13 @@ public class Lexer {
 		{
 			
 			String s = String.valueOf(charListe.get(i));
-			if(!isZahl(charListe.get(i))) 
+			if(!isDouble(charListe.get(i))) 
 			{
 				stringListe.add(s);
 				continue;
 			}
 			i++;
-			while(i < charListe.size() && (isZahl(charListe.get(i)) || charListe.get(i) == '.'))
+			while(i < charListe.size() && (isDouble(charListe.get(i)) || charListe.get(i) == '.'))
 			{
 				s = s + String.valueOf(charListe.get(i));
 				i++;
@@ -86,7 +86,7 @@ public class Lexer {
 	/*
 	 * Chechen, ob ein Char eine Zahl ist
 	 */
-	private static boolean isZahl(char c)
+	public static boolean isDouble(char c)
 	{
 		try {
 		Double.parseDouble(String.valueOf(c));
@@ -98,5 +98,19 @@ public class Lexer {
 		
 		return true;
 	}
+	
+	public static boolean isDouble(String s)
+	{
+		try {
+		Double.parseDouble(String.valueOf(s));
+		}
+		catch(Exception e)
+		{
+			return false;			
+		}
+		
+		return true;
+	}
+	
 
 }
