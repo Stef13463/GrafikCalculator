@@ -3,13 +3,14 @@ package funktionenHandler;
 import java.util.ArrayList;
 
 /*
- * Eine der zwei Endklaseen eines Funktionsbaums.
+ * Eine der Endklaseen eines Funktionsbaums.
  * Speichert eine Double Zahl.
  * Zum erzeugen ist die Methoed createNumberChild zu nutzen
  */
 public class NumberChild extends Baum {
 	
 	double number;
+	
 	NumberChild(double number)	{
 		super(null, null, null);
 		this.number = number;

@@ -27,6 +27,28 @@ public class Lexer {
 	}
 	
 	
+	public static ArrayList<String> lexenOhneFunktionen(String funktion_String)
+	{
+			
+		
+		
+		//String in Chars umwandlenn
+		ArrayList<Character> charListe = String_to_Chars(funktion_String);
+				
+		//Leerzeichen entfernen
+		removeSpace(charListe);
+		
+		
+		//Zahlen zusammenfassen und alles in Strings darstellen
+		ArrayList<String> stringListe = conclude_to_String(charListe);
+			
+		
+		return stringListe;
+		
+	}
+	
+	
+	
 	
 	private static ArrayList<String> conclude_to_String(ArrayList<Character> charListe)
 	{
