@@ -1,8 +1,10 @@
 package funktionenHandler;
 
+import java.util.ArrayList;
+
 public class FunktionsTyp 
 {
-	
+	private String[] möglicheFunktionen = {"sin", "cos", "tan", "log", "ln", "exp"};
 	private String typ; 
 	
 	public FunktionsTyp(String typ)
@@ -45,6 +47,12 @@ public class FunktionsTyp
 	public static String findeInnerenWert(String string) {
 		// TODO Auto-generated method stub
 		return null;
+	}
+
+
+	public static ArrayList<String> findeFunktionen(ArrayList<String> stringListe) {
+		// TODO Auto-generated method stub
+		return stringListe;
 	}
 	
 	

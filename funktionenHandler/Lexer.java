@@ -22,6 +22,9 @@ public class Lexer {
 		ArrayList<String> stringListe = conclude_to_String(charListe);
 			
 		
+		
+		stringListe = FunktionsTyp.findeFunktionen(stringListe);
+		
 		return stringListe;
 		
 	}
